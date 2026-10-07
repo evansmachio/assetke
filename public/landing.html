@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a35">
+  <meta name="description" content="KID Asset Management System helps your organization keep devices, ownership, and status in one clear place.">
+  <title>KID — Know what your organization owns</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #101a35;
+      --muted: #66718a;
+      --blue: #4357dc;
+      --blue-dark: #3447c6;
+      --mint: #a9f3d0;
+      --paper: #f5f7fc;
+      --line: #e6eaf2;
+      --white: #fff;
+      --shadow: 0 28px 80px rgba(20, 34, 74, .15);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--white); }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .shell { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+    .topbar { height: 82px; display: flex; align-items: center; border-bottom: 1px solid rgba(230,234,242,.8); background: rgba(255,255,255,.86); position: relative; z-index: 2; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-size: 18px; font-weight: 800; letter-spacing: -.04em; }
+    .brand-mark { width: 39px; height: 39px; display: grid; place-items: center; border-radius: 12px; color: white; background: linear-gradient(145deg,#596ef5,#3448c8); box-shadow: 0 7px 18px rgba(67,87,220,.28); font-size: 15px; letter-spacing: -.07em; }
+    .brand small { display: block; margin-top: 1px; color: #8992a6; font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    .navlinks { display: flex; align-items: center; gap: 35px; margin-left: auto; color: #56617a; font-size: 14px; font-weight: 600; }
+    .navlinks a:hover { color: var(--blue); }
+    .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 21px; border: 1px solid transparent; border-radius: 12px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; box-shadow: 0 8px 18px rgba(67,87,220,.18); transition: transform .18s ease, background .18s ease, box-shadow .18s ease; }
+    .button:hover { transform: translateY(-2px); background: var(--blue-dark); box-shadow: 0 12px 24px rgba(67,87,220,.25); }
+    .button.secondary { background: #fff; border-color: var(--line); color: var(--ink); box-shadow: none; }
+    .button.secondary:hover { border-color: #cbd3e3; background: #fbfcff; }
+    .hero { position: relative; overflow: hidden; padding: 82px 0 92px; background: radial-gradient(ellipse at 78% 43%, rgba(219,226,255,.78), transparent 39%), linear-gradient(180deg,#fbfcff 0%,#f6f8fd 100%); }
+    .hero:before { content:""; position:absolute; width:410px; height:410px; border:1px solid rgba(67,87,220,.09); border-radius:50%; right:-230px; top:-184px; box-shadow:0 0 0 46px rgba(67,87,220,.025), 0 0 0 92px rgba(67,87,220,.02); }
+    .hero-grid { display: grid; grid-template-columns: .94fr 1.06fr; gap: 52px; align-items: center; position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow .dot { width: 7px; height: 7px; display: inline-block; border-radius: 50%; background: #56c995; box-shadow: 0 0 0 4px rgba(86,201,149,.14); }
+    h1 { max-width: 570px; margin: 19px 0 20px; font-size: clamp(43px, 5.1vw, 67px); line-height: 1.035; letter-spacing: -.065em; font-weight: 780; }
+    h1 span { color: var(--blue); }
+    .hero-copy { max-width: 490px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 31px; }
+    .microcopy { margin-top: 17px; color: #8992a6; font-size: 12px; }
+    .visual-wrap { position: relative; padding: 10px 0 18px 18px; }
+    .visual-halo { position: absolute; width: 390px; height: 390px; border-radius: 50%; right: 30px; top: 50%; transform: translateY(-50%); background: linear-gradient(145deg,rgba(213,221,255,.75),rgba(230,250,243,.38)); filter: blur(1px); }
+    .dashboard { position: relative; z-index:1; overflow:hidden; border: 1px solid #e6eaf2; border-radius: 21px; background: rgba(255,255,255,.97); box-shadow: var(--shadow); transform: rotate(-1.2deg); }
+    .dash-top { display:flex; align-items:center; justify-content:space-between; padding:18px 21px; border-bottom:1px solid #edf0f6; }
+    .dash-title { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:750; }
+    .dash-icon { width:28px; height:28px; display:grid; place-items:center; border-radius:9px; color:var(--blue); background:#edf0ff; }
+    .dash-user { width:28px;height:28px;border-radius:50%; display:grid;place-items:center;color:#294c41;background:#d8f7e8;font-size:10px;font-weight:800; }
+    .dash-content { padding:19px 21px 21px; }
+    .dash-greeting { display:flex; justify-content:space-between; align-items:end; margin-bottom:17px; }
+    .dash-greeting strong { display:block; font-size:16px; letter-spacing:-.03em; }
+    .dash-greeting small { display:block; margin-top:5px; color:#8a93a7; font-size:10px; }
+    .dash-greeting .period { color:#929bad; font-size:9px; font-weight:700; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .stat { padding:13px 12px; border:1px solid #edf0f5; border-radius:11px; background:#fff; }
+    .stat label { display:block; color:#8892a6; font-size:9px; font-weight:650; }
+    .stat strong { display:block; margin-top:7px; font-size:20px; letter-spacing:-.05em; }
+    .stat em { color:#23a873; font-size:9px; font-style:normal; font-weight:700; }
+    .asset-table { width:100%; margin-top:19px; border-collapse:collapse; text-align:left; }
+    .asset-table th { padding:0 8px 9px; color:#97a0b1; font-size:8px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+    .asset-table td { padding:10px 8px; border-top:1px solid #f0f2f7; font-size:9px; font-weight:600; white-space:nowrap; }
+    .asset-name { display:flex; align-items:center; gap:8px; }
+    .device { width:25px;height:25px;display:grid;place-items:center;border-radius:8px;color:#5365d8;background:#f0f2ff;font-size:10px; }
+    .asset-name small { display:block; margin-top:3px; color:#9aa2b2; font-size:8px; font-weight:500; }
+    .badge { display:inline-flex; align-items:center; gap:4px; padding:4px 7px; border-radius:99px; background:#e9faf2; color:#20885e; font-size:8px; }
+    .badge:before { content:""; width:4px;height:4px;border-radius:50%;background:currentColor; }
+    .dash-bottom { display:flex; justify-content:space-between; align-items:center; margin-top:15px; padding:11px 12px; border-radius:10px; background:#f7f8ff; color:#7b849a; font-size:9px; }
+    .dash-bottom b { color:var(--blue); font-size:9px; }
+    .float-card { position:absolute; z-index:2; display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid #ecf0f5; border-radius:13px; background:#fff; box-shadow:0 12px 35px rgba(34,47,88,.13); }
+    .float-card.qr { right:-18px; bottom:3px; }
+    .float-card.safe { left:-12px; top:64px; }
+    .float-icon { width:30px;height:30px;display:grid;place-items:center;border-radius:9px;color:#4357dc;background:#eef0ff;font-size:14px; }
+    .float-icon.green { color:#229363;background:#e9faf2; }
+    .float-card b { display:block; font-size:10px; }
+    .float-card small { display:block; margin-top:3px;color:#929bad;font-size:8px; }
+    .trust { padding:27px 0; border-bottom:1px solid #eef0f5; background:#fff; }
+    .trust-inner { display:flex; justify-content:center; align-items:center; gap:23px; color:#79839a; text-align:center; font-size:12px; }
+    .trust-inner strong { color:var(--ink); font-size:12px; }
+    .trust-points { display:flex; flex-wrap:wrap; justify-content:center; gap:25px; color:#66718a; }
+    .trust-points span { display:inline-flex;align-items:center;gap:7px; }
+    .check { color:#20a775; font-size:15px; font-weight:800; }
+    section.content-section { padding:92px 0; }
+    .section-heading { max-width:650px; margin:0 auto 42px; text-align:center; }
+    .section-heading h2 { margin:13px 0 12px; font-size:clamp(30px,4vw,43px); line-height:1.13; letter-spacing:-.05em; }
+    .section-heading p { margin:0; color:var(--muted); font-size:15px; line-height:1.75; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .feature { min-height:220px; padding:25px; border:1px solid var(--line); border-radius:17px; background:#fff; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .feature:hover { transform:translateY(-4px); border-color:#d8def8; box-shadow:0 14px 36px rgba(29,43,87,.07); }
+    .feature-icon { width:43px;height:43px;display:grid;place-items:center;border-radius:13px;color:var(--blue);background:#eef0ff;font-size:18px; }
+    .feature:nth-child(2) .feature-icon { color:#239a69;background:#e9faf2; }
+    .feature:nth-child(3) .feature-icon { color:#bd7b29;background:#fff5e8; }
+    .feature h3 { margin:20px 0 8px; font-size:16px; letter-spacing:-.025em; }
+    .feature p { margin:0; color:var(--muted); font-size:13px; line-height:1.7; }
+    .workflow { padding:82px 0; background:#101a35; color:#fff; }
+    .workflow-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:70px; align-items:center; }
+    .workflow .eyebrow { color:#a9b6ff; }
+    .workflow h2 { max-width:440px; margin:15px 0; font-size:clamp(32px,4vw,45px); line-height:1.12; letter-spacing:-.05em; }
+    .workflow p { max-width:440px; margin:0; color:#bac2d4; font-size:14px; line-height:1.8; }
+    .workflow-list { display:grid; gap:13px; }
+    .workflow-step { display:grid; grid-template-columns:42px 1fr; gap:15px; align-items:start; padding:18px 20px; border:1px solid rgba(255,255,255,.11); border-radius:14px; background:rgba(255,255,255,.045); }
+    .step-no { width:38px;height:38px;display:grid;place-items:center;border-radius:11px;color:#c5cbff;background:rgba(119,137,255,.15);font-size:12px;font-weight:800; }
+    .workflow-step b { display:block; margin:2px 0 5px; font-size:13px; }
+    .workflow-step span { display:block; color:#aeb8cc; font-size:12px; line-height:1.65; }
+    .cta { padding:79px 0; background:#f7f8fc; }
+    .cta-box { display:flex; justify-content:space-between; align-items:center; gap:28px; padding:39px 42px; border:1px solid #e5e9f3; border-radius:20px; background:#fff; box-shadow:0 15px 45px rgba(31,44,83,.055); }
+    .cta-box h2 { margin:0 0 9px; font-size:clamp(25px,3vw,34px); letter-spacing:-.045em; }
+    .cta-box p { margin:0; color:var(--muted); font-size:14px; }
+    footer { padding:28px 0; background:#f7f8fc; }
+    .footer-inner { display:flex;justify-content:space-between;align-items:center;gap:20px;color:#8690a4;font-size:11px; }
+    .footer-brand { display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:800; }
+    .footer-brand .brand-mark { width:29px;height:29px;border-radius:9px;font-size:11px; }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns:1fr; gap:48px; }
+      .hero-copy { max-width:580px; }
+      .visual-wrap { width:min(610px,100%); margin:0 auto; }
+      .workflow-grid { grid-template-columns:1fr; gap:36px; }
+      .workflow h2,.workflow p { max-width:650px; }
+    }
+    @media (max-width: 640px) {
+      .shell { width:min(100% - 36px, 500px); }
+      .topbar { height:70px; }
+      .nav { gap:12px; }
+      .navlinks { display:none; }
+      .nav > .button { min-height:42px; padding:0 15px; font-size:12px; }
+      .brand { font-size:16px; }
+      .brand-mark { width:35px;height:35px; }
+      .hero { padding:58px 0 57px; }
+      .hero-grid { gap:40px; }
+      h1 { margin-top:16px; font-size:clamp(43px,12vw,58px); }
+      .hero-copy { font-size:15px; line-height:1.72; }
+      .hero-actions { display:grid; grid-template-columns:1fr; gap:10px; margin-top:25px; }
+      .hero-actions .button { width:100%; }
+      .microcopy { font-size:11px; }
+      .visual-wrap { padding:5px 0 12px; }
+      .dashboard { border-radius:16px; transform:none; }
+      .dash-top { padding:14px 14px; }
+      .dash-content { padding:14px 12px 14px; }
+      .stats { gap:6px; }
+      .stat { padding:10px 8px; }
+      .stat strong { font-size:17px; }
+      .asset-table th { font-size:7px; padding:0 4px 8px; }
+      .asset-table td { padding:8px 4px; font-size:8px; }
+      .asset-table td:nth-child(3), .asset-table th:nth-child(3) { display:none; }
+      .asset-name { gap:5px; }
+      .device { width:22px;height:22px; }
+      .float-card { padding:9px 10px; }
+      .float-card.qr { right:-5px; bottom:-9px; }
+      .float-card.safe { left:-6px; top:24px; }
+      .float-icon { width:26px;height:26px; }
+      .float-card b { font-size:9px; }
+      .float-card small { font-size:7px; }
+      .trust { padding:21px 0; }
+      .trust-inner { flex-direction:column; gap:13px; font-size:11px; }
+      .trust-points { gap:9px 16px; font-size:10px; }
+      section.content-section { padding:66px 0; }
+      .section-heading { margin-bottom:28px; }
+      .section-heading p { font-size:13px; }
+      .features { grid-template-columns:1fr; gap:11px; }
+      .feature { min-height:0; padding:20px; }
+      .feature h3 { margin-top:15px; }
+      .workflow { padding:63px 0; }
+      .workflow-step { padding:15px; }
+      .cta { padding:56px 0; }
+      .cta-box { flex-direction:column; align-items:stretch; padding:25px 21px; }
+      .cta-box .button { width:100%; }
+      .footer-inner { flex-direction:column; align-items:flex-start; gap:13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { transition-duration:.01ms !important; animation-duration:.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="KID Asset Management home">
+        <span class="brand-mark" aria-hidden="true">KID</span>
+        <span>KID<small>Asset management</small></span>
+      </a>
+      <div class="navlinks">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+      </div>
+      <a class="button" href="/login.html">Sign in <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> A clearer way to manage assets</div>
+          <h1>Know what your organization <span>owns.</span></h1>
+          <p class="hero-copy">Keep every device, its status, and where it belongs in one organized place. KID makes it easier for your team to find the right information and stay in control.</p>
+          <div class="hero-actions">
+            <a class="button" href="/login.html">Sign in to your workspace <span aria-hidden="true">→</span></a>
+            <a class="button secondary" href="#features">Explore the platform</a>
+          </div>
+          <p class="microcopy">Secure access for your team, from any device.</p>
+        </div>
+
+        <div class="visual-wrap" aria-label="Preview of the KID asset dashboard">
+          <div class="visual-halo" aria-hidden="true"></div>
+          <div class="float-card safe"><span class="float-icon green" aria-hidden="true">✓</span><span><b>One trusted register</b><small>Details kept together</small></span></div>
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-title"><span class="dash-icon" aria-hidden="true">▦</span> Sample asset overview</div>
+              <div class="dash-user" aria-label="Signed-in user">EM</div>
+            </div>
+            <div class="dash-content">
+              <div class="dash-greeting"><div><strong>Good morning, Evans</strong><small>Here is your asset snapshot</small></div><span class="period">THIS MONTH⌄</span></div>
+              <div class="stats">
+                <div class="stat"><label>Total assets</label><strong>248</strong><em>● Up to date</em></div>
+                <div class="stat"><label>Active</label><strong>196</strong><em>● In use</em></div>
+                <div class="stat"><label>In stock</label><strong>32</strong><em>● Available</em></div>
+              </div>
+              <table class="asset-table" aria-label="Sample asset list">
+                <thead><tr><th>Device</th><th>Category</th><th>Department</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="asset-name"><span class="device" aria-hidden="true">▣</span><span>HP ProBook 440<small>KID-LT-0018</small></span></span></td><td>Laptop</td><td>Operations</td><td><span class="badge">Active</span></td></tr>
+                  <tr><td><span class="asset-name"><span class="device" aria-hidden="true">▤</span><span>Dell OptiPlex<small>KID-PC-0042</small></span></span></td><td>Desktop</td><td>Finance</td><td><span class="badge">Active</span></td></tr>
+                  <tr><td><span class="asset-name"><span class="device" aria-hidden="true">▣</span><span>Lenovo ThinkPad<small>KID-LT-0026</small></span></span></td><td>Laptop</td><td>IT</td><td><span class="badge">Active</span></td></tr>
+                </tbody>
+              </table>
+              <div class="dash-bottom"><span>Everything in one organized register</span><b>View assets →</b></div>
+            </div>
+          </div>
+          <div class="float-card qr"><span class="float-icon" aria-hidden="true">⌗</span><span><b>Scan and identify</b><small>QR code ready</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="shell trust-inner">
+        <strong>Built for everyday asset work</strong>
+        <div class="trust-points">
+          <span><b class="check">✓</b> Clear device records</span>
+          <span><b class="check">✓</b> Role-based access</span>
+          <span><b class="check">✓</b> Works across devices</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="content-section" id="features">
+      <div class="shell">
+        <div class="section-heading">
+          <div class="eyebrow">A workspace that stays clear</div>
+          <h2>Everything your team needs to stay organized.</h2>
+          <p>Spend less time searching through scattered records. See your organization’s assets and the details that help people manage them.</p>
+        </div>
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">▤</div>
+            <h3>One searchable asset register</h3>
+            <p>Find devices by tag, name, serial number, department, location, or status in a single register.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">⌗</div>
+            <h3>Quick QR identification</h3>
+            <p>Use QR labels to open the matching asset record faster when you are working on site.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">◉</div>
+            <h3>Access that fits each role</h3>
+            <p>Give staff the access they need, with administrative controls reserved for authorized roles.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow" id="how-it-works">
+      <div class="shell workflow-grid">
+        <div>
+          <div class="eyebrow">Simple by design</div>
+          <h2>From sign-in to the details you need.</h2>
+          <p>KID brings asset information into a straightforward workspace your team can use at a desk or on a phone.</p>
+        </div>
+        <div class="workflow-list">
+          <div class="workflow-step"><div class="step-no">01</div><div><b>Sign in securely</b><span>Open your account from a laptop or phone using your authorized login.</span></div></div>
+          <div class="workflow-step"><div class="step-no">02</div><div><b>Find an asset</b><span>Search the register or scan a QR code to get to the device record.</span></div></div>
+          <div class="workflow-step"><div class="step-no">03</div><div><b>See its current details</b><span>Check its status, category, department, and location in one view.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell cta-box">
+        <div><h2>Ready to get a clearer view?</h2><p>Sign in to your KID workspace to continue.</p></div>
+        <a class="button" href="/login.html">Go to sign in <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div class="footer-brand"><span class="brand-mark" aria-hidden="true">KID</span> KID Asset Management</div>
+      <span>Organized assets. Clearer decisions.</span>
+    </div>
+  </footer>
+</body>
+</html>

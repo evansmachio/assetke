@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asset Management System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- =========================
+         SIDEBAR
+    ========================== -->
+      <aside class="sidebar">
+        <!-- Brand -->
+        <div class="sidebar-brand">Asset Manager</div>
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar-nav">
+          <a href="#" class="active">Dashboard</a>
+          <a href="assets.html">Assets</a>
+          <a href="#">Audits</a>
+          <a href="#">Maintenance</a>
+          <a href="#">Reports</a>
+          <a href="#">Users</a>
+          <a href="#">Departments</a>
+          <a href="#">Categories</a>
+          <a href="#">Settings</a>
+        </nav>
+      </aside>
+      <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+      <main class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <span class="topbar-title">Dashboard</span>
+          </div>
+          <div class="topbar-right">
+            <div class="user-avatar">SA</div>
+          </div>
+        </header>
+        <!-- =========================
+             PAGE CONTENT
+        ========================== -->
+        <section class="page-wrap">
+<p id="dashboard-message" role="status" aria-live="polite"></p>
+          <!-- PAGE HEADING -->
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">
+                ASSET OVERVIEW
+                <span class="status-dot"></span>
+                SYSTEM ACTIVE
+              </p>
+              <h1>
+                Good morning, Administrator
+                <span class="wave">✦</span>
+              </h1>
+              <p class="heading-subtitle">
+                Here's what's happening across your organization's assets.
+              </p>
+            </div>
+            <!-- HEADING ACTIONS -->
+            <div class="heading-actions">
+              <button class="button secondary-button">Scan QR</button>
+              <a class="button primary-button" href="create-asset.html">+ Add Asset</a>
+            </div>
+          </div>
+          <!-- METRIC CARDS -->
+          <div class="metric-grid">
+            <!-- Total Assets -->
+            <div class="metric-card">
+              <h3>Total Assets</h3>
+              <div class="metric-value" id="total-assets">0</div>
+              <div class="metric-label">Registered assets</div>
+              <div class="mini-bars">
+                <span style="height: 30%"></span>
+                <span style="height: 45%"></span>
+                <span style="height: 60%"></span>
+                <span style="height: 35%"></span>
+                <span style="height: 70%"></span>
+                <span style="height: 50%"></span>
+                <span style="height: 80%"></span>
+                <span style="height: 40%"></span>
+                <span style="height: 65%"></span>
+                <span style="height: 55%"></span>
+                <span style="height: 75%"></span>
+                <span style="height: 45%"></span>
+                <span style="height: 90%"></span>
+                <span style="height: 60%"></span>
+                <span style="height: 70%"></span>
+                <span style="height: 85%"></span>
+                <span style="height: 95%"></span>
+              </div>
+            </div>
+            <!-- Active Assets -->
+            <div class="metric-card">
+              <h3>Active Assets</h3>
+              <div class="metric-value" id="card-active-assets">0</div>
+              <div class="metric-label">Currently active</div>
+            </div>
+            <!-- Maintenance -->
+            <div class="metric-card">
+              <h3>Maintenance</h3>
+              <div class="metric-value" id="card-maintenance-assets">0</div>
+              <div class="metric-label">Need attention</div>
+            </div>
+            <!-- Available -->
+            <div class="metric-card">
+              <h3>Available</h3>
+              <div class="metric-value" id="available-assets">0</div>
+              <div class="metric-label">Ready for assignment</div>
+            </div>
+          </div>
+          <!-- MAIN DASHBOARD PANELS -->
+          <div class="content-grid">
+            <!-- ASSET LIFECYCLE PANEL -->
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Asset Lifecycle</h2>
+                  <p>Illustration only — historical data is not connected</p>
+                </div>
+                <select class="period-select">
+                  <option>Last 6 months</option>
+                </select>
+              </div>
+              <!-- CHART -->
+              <div class="chart-wrap">
+                <div class="chart-y-axis">
+                  <span>100</span>
+                  <span>75</span>
+                  <span>50</span>
+                  <span>25</span>
+                  <span>0</span>
+                </div>
+                <div class="chart-area">
+                  <div class="grid-lines">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                  </div>
+                  <svg
+                    class="lifecycle-chart"
+                    viewBox="0 0 600 180"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="chartFill"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="0%"
+                          stop-color="#9bd1b6"
+                          stop-opacity=".35"
+                        />
+                        <stop
+                          offset="100%"
+                          stop-color="#9bd1b6"
+                          stop-opacity="0"
+                        />
+                      </linearGradient>
+                    </defs>
+                    <!-- Area -->
+                    <path
+                      class="chart-fill"
+                      d="M0,145
+                           C50,130 75,135 110,110
+                           C145,85 165,100 200,88
+                           C240,73 260,80 300,65
+                           C340,50 360,62 400,48
+                           C440,35 470,45 500,30
+                           C535,18 565,25 600,15
+                           L600,180
+                           L0,180 Z"
+                    ></path>
+                    <!-- Line -->
+                    <path
+                      class="chart-line"
+                      d="M0,145
+                           C50,130 75,135 110,110
+                           C145,85 165,100 200,88
+                           C240,73 260,80 300,65
+                           C340,50 360,62 400,48
+                           C440,35 470,45 500,30
+                           C535,18 565,25 600,15"
+                    ></path>
+                    <!-- Points -->
+                    <circle
+                      class="chart-point"
+                      cx="110"
+                      cy="110"
+                      r="4"
+                    ></circle>
+                    <circle class="chart-point" cx="200" cy="88" r="4"></circle>
+                    <circle class="chart-point" cx="300" cy="65" r="4"></circle>
+                    <circle class="chart-point" cx="400" cy="48" r="4"></circle>
+                    <circle class="chart-point" cx="500" cy="30" r="4"></circle>
+                    <circle
+                      class="chart-point last"
+                      cx="600"
+                      cy="15"
+                      r="4"
+                    ></circle>
+                  </svg>
+                  <!-- X AXIS -->
+                  <div class="chart-x-axis">
+                    <span>Apr</span>
+                    <span>May</span>
+                    <span>Jun</span>
+                    <span>Jul</span>
+                    <span>Aug</span>
+                    <span>Sep</span>
+                  </div>
+                </div>
+              </div>
+              <!-- LEGEND -->
+              <div class="chart-legend">
+                <span>
+                  <i class="legend-dot"></i>
+                  Active
+                </span>
+                <span>
+                  <i class="legend-dot coral-dot"></i>
+                  Maintenance
+                </span>
+                <span>
+                  <i class="legend-dot yellow"></i>
+                  Available
+                </span>
+                <span>
+                  <i class="legend-dot gray"></i>
+                  Retired
+                </span>
+                <span class="chart-total">
+                  0
+                  <small>Total assets</small>
+                </span>
+              </div>
+            </div>
+            <!-- STATUS PANEL -->
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Asset Status</h2>
+                  <p>Current status distribution</p>
+                </div>
+              </div>
+              <div class="donut-area">
+                <!-- DONUT -->
+                <div class="donut">
+                  <div class="donut-inner">
+                    <strong id="donut-total-assets">0</strong>
+                    <span>Total assets</span>
+                  </div>
+                </div>
+                <!-- STATUS LIST -->
+                <div class="status-list">
+                  <div>
+                    <span>
+                      <i class="legend-dot"></i>
+                      Active
+                    </span>
+                    <strong  id="active-assets">0</strong>
+                  </div>
+                  <div>
+                    <span>
+                      <i class="legend-dot yellow"></i>
+                      Available
+                    </span>
+                    <strong id="card-assets">0</strong>
+                  </div>
+                  <div>
+                    <span>
+                      <i class="legend-dot coral-dot"></i>
+                      Maintenance
+                    </span>
+                    <strong id="maintenance-assets">0</strong>
+                  </div>
+                  <div>
+                    <span>
+                      <i class="legend-dot gray"></i>
+                      Retired
+                    </span>
+                    <strong id="retired-assets">0</strong>
+                  </div>
+<div><span>Other / Unknown</span><strong id="other-assets">0</strong></div>
+                </div>
+              </div>
+              <a class="full-width-link" href="assets.html">View all assets →</a>
+            </div>
+          </div>
+          <!-- LOWER DASHBOARD PANELS -->
+          <div class="lower-grid">
+            <!-- NEEDS ATTENTION -->
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Needs Attention</h2>
+                  <p>Assets that may require action</p>
+                </div>
+                <span class="attention-count">0</span>
+              </div>
+              <div class="attention-list">
+                <div class="attention-item">
+                  <div class="attention-icon">!</div>
+                  <div class="attention-info">
+                    <strong>Attention data is not connected</strong>
+                    <span>Maintenance counts appear above</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- RECENT ACTIVITY -->
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Recent Activity</h2>
+                  <p>Latest asset activity</p>
+                </div>
+                <button class="text-button">View all →</button>
+              </div>
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="activity-icon">+</div>
+                  <div class="activity-info">
+                    <strong>Activity history is not connected</strong>
+                    <span>Asset activity will appear here</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- QUICK ACTIONS -->
+          <div class="quick-actions">
+            <div class="quick-actions-heading">
+              <h2>Quick Actions</h2>
+              <p>Common asset management tasks</p>
+            </div>
+            <div class="quick-actions-grid">
+              <button class="quick-action-card">
+                <span class="quick-action-icon">+</span>
+                <span>
+                  <strong>Add Asset</strong>
+                  <small>Register a new asset</small>
+                </span>
+              </button>
+              <button class="quick-action-card">
+                <span class="quick-action-icon">◉</span>
+                <span>
+                  <strong>Scan QR</strong>
+                  <small>Scan an asset QR code</small>
+                </span>
+              </button>
+              <button class="quick-action-card">
+                <span class="quick-action-icon">▣</span>
+                <span>
+                  <strong>View Assets</strong>
+                  <small>Browse all registered assets</small>
+                </span>
+              </button>
+              <button class="quick-action-card">
+                <span class="quick-action-icon">↗</span>
+                <span>
+                  <strong>Generate Report</strong>
+                  <small>Create an asset report</small>
+                </span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="dashboard.js" defer></script>
+  </body>
+</html>

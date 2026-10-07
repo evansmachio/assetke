@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Asset | AMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">A</div>
+            <div>
+                <h2>AMS</h2>
+                <span>Asset Management</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html">
+                Dashboard
+            </a>
+            <a href="assets.html" class="active">
+                Assets
+            </a>
+            <a href="#">
+                Audits
+            </a>
+            <a href="#">
+                Maintenance
+            </a>
+            <a href="#">
+                Reports
+            </a>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h2>Create Asset</h2>
+                <p>
+                    Register and configure a new organizational asset.
+                </p>
+            </div>
+        </header>
+        <section class="create-asset-page">
+            <div class="create-header">
+                <div class="create-header-left">
+                    <p class="eyebrow">
+                        ASSET MANAGEMENT
+                        <span class="status-dot"></span>
+                        SYSTEM ACTIVE
+                    </p>
+                    <h1>Create New Asset</h1>
+                    <p>
+                        Add a new asset to your organization's centralized
+                        asset register.
+                    </p>
+                </div>
+                <a
+                    href="assets.html"
+                    class="back-link"
+                >
+                    ← Back to Assets
+                </a>
+            </div>
+            <div class="asset-form-card">
+                <form id="create-asset-form">
+                    <div class="asset-form-section">
+                        <div class="section-title">
+                            <div class="section-number">
+                                01
+                            </div>
+                            <div>
+                                <h2>Asset Identification</h2>
+                                <p>
+                                    Basic information used to identify the asset.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="asset-form-grid">
+                            <div class="asset-form-group">
+                                <label for="asset-tag">
+                                    Asset Tag
+                                    <span class="required">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="asset-tag"
+                                    name="asset_tag"
+                                    placeholder="AST-IT-LAP-0001"
+                                    required
+                                >
+                                <span class="field-help">
+                                    A unique identifier for this asset.
+                                </span>
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="asset-name">
+                                    Asset Name
+                                    <span class="required">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="asset-name"
+                                    name="asset_name"
+                                    placeholder="Dell Latitude 5420"
+                                    required
+                                >
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="category">
+                                    Asset Category
+                                    <span class="required">*</span>
+                                </label>
+                                <select
+                                    id="category"
+                                    name="category_id"
+                                    required
+                                ><option value="">Select category</option></select>
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="status">
+                                    Asset Status
+                                    <span class="required">*</span>
+                                </label>
+                                <select
+                                    id="status"
+                                    name="status"
+                                >
+                                    <option value="In Stock">
+                                        In Stock
+                                    </option>
+                                    <option value="Active">
+                                        Active
+                                    </option>
+                                    <option value="Maintenance">
+                                        Maintenance
+                                    </option>
+                                    <option value="Retired">
+                                        Retired
+                                    </option>
+                                </select>
+                                <div class="status-preview">
+                                    <span class="status-indicator"></span>
+                                    Choose the current asset status
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="asset-form-section">
+                        <div class="section-title">
+                            <div class="section-number">
+                                02
+                            </div>
+                            <div>
+                                <h2>Asset Details</h2>
+                                <p>
+                                    Additional information about the asset.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="asset-form-grid">
+                            <div class="asset-form-group full-width">
+                                <label for="description">
+                                    Description
+                                </label>
+                                <textarea
+                                    id="description"
+                                    name="description"
+                                    placeholder="Describe the asset, its purpose, condition, or other useful information..."
+                                ></textarea>
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="serial-number">
+                                    Serial Number
+                                </label>
+                                <input
+                                    type="text"
+                                    id="serial-number"
+                                    name="serial_number"
+                                    placeholder="Enter serial number"
+                                >
+                                <span class="field-help">
+                                    Used to identify the physical asset.
+                                </span>
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="model">
+                                    Model
+                                </label>
+                                <input
+                                    type="text"
+                                    id="model"
+                                    name="model"
+                                    placeholder="e.g. Latitude 5420"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="asset-form-section">
+                        <div class="section-title">
+                            <div class="section-number">
+                                03
+                            </div>
+                            <div>
+                                <h2>Assignment</h2>
+                                <p>
+                                    Specify where the asset belongs and who
+                                    is responsible for it.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="asset-form-grid">
+                            <div class="asset-form-group">
+                                <label for="department">
+                                    Department
+                                </label>
+                                <select
+                                    id="department"
+                                    name="department_id"
+                                >
+                                    <option value="">
+                                        Select department
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="assigned-user">
+                                    Assigned To
+                                </label>
+                                <select
+                                    id="assigned-user"
+                                    name="assigned_to"
+                                >
+                                    <option value="">
+                                        Not assigned
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="asset-form-section">
+                        <div class="section-title">
+                            <div class="section-number">
+                                04
+                            </div>
+                            <div>
+                                <h2>Acquisition Information</h2>
+                                <p>
+                                    Record information about how the asset
+                                    was acquired.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="asset-form-grid">
+                            <div class="asset-form-group">
+                                <label for="purchase-date">
+                                    Purchase Date
+                                </label>
+                                <input
+                                    type="date"
+                                    id="purchase-date"
+                                    name="purchase_date"
+                                >
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="purchase-cost">
+                                    Purchase Cost
+                                </label>
+                                <input
+                                    type="number"
+                                    id="purchase-cost"
+                                    name="purchase_cost"
+                                    placeholder="0.00"
+                                    min="0"
+                                    step="0.01"
+                                >
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="supplier">
+                                    Supplier
+                                </label>
+                                <input
+                                    type="text"
+                                    id="supplier"
+                                    name="supplier"
+                                    placeholder="Supplier name"
+                                >
+                            </div>
+                            <div class="asset-form-group">
+                                <label for="warranty">
+                                    Warranty Expiry
+                                </label>
+                                <input
+                                    type="date"
+                                    id="warranty"
+                                    name="warranty_expiry"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        id="form-message"
+                        class="form-message" role="status" aria-live="polite"
+                    ></div>
+                    <div class="form-actions">
+                        <a
+                            href="assets.html"
+                            class="form-button cancel-button"
+                        >
+                            Cancel
+                        </a>
+                        <button
+                            type="submit"
+                            class="form-button save-button"
+                        >
+                            Create Asset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="create-asset.js" defer></script>
+</body>
+</html>
